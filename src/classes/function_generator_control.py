@@ -13,13 +13,24 @@ class FunctionGenerator:
     def get_all_instruments(self):
         return self.rm.list_resources()
 
-    def connect_instrument(self, instrument_id="ASRL6::INSTR"):
+    def connect_instrument_rs232(self, instrument_id="ASRL6::INSTR"):
         self.instrument_id = instrument_id
+        print(instrument_id)
         if instrument_id in self.get_all_instruments():
             self.instrument = self.rm.open_resource(
                 instrument_id, baud_rate=9600, data_bits=8, parity=Parity.none
             )
+            identification = self.instrument.query("*IDN?")
+            print("Instrument ID:", identification)
+        else:
+            print("Instrument not connected")
 
+    def connect_instrument_gpib(self, instrument_id="GPIB0::6::INSTR"):
+        self.instrument_id = instrument_id
+        print(instrument_id)
+        if instrument_id in self.get_all_instruments():
+            # Connect to the instrument through GPIB
+            self.instrument = self.rm.open_resource(instrument_id)
             identification = self.instrument.query("*IDN?")
             print("Instrument ID:", identification)
         else:
@@ -70,5 +81,5 @@ class FunctionGenerator:
 
 if __name__ == "__main__":
     generator = FunctionGenerator()
-    generator.connect_instrument("ASRL6::INSTR")
+    generator.connect_instrument_rs232("ASRL3::INSTR")
     generator.set_frequency(1234)

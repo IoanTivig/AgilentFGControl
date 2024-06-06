@@ -54,12 +54,23 @@ class MainUI(QMainWindow):
         self.pyqt5_combobox_com.addItems(coms)
 
     def connect_to_selected_com(self):
-        try:
-            selected_port = self.pyqt5_combobox_com.currentText()
-            self.generator.connect_instrument(instrument_id=selected_port)
-            print("Connected to", selected_port)
-        except:
-            print("Error connecting to instrument")
+        print("Connecting to instrument 1")
+        if self.pyqt5_combobox_com_type.currentText() == "RS232":
+            try:
+                selected_port = self.pyqt5_combobox_com.currentText()
+                self.generator.connect_instrument_rs232(instrument_id=selected_port)
+                print("Connected to", selected_port)
+            except:
+                print("Error connecting to instrument")
+        elif self.pyqt5_combobox_com_type.currentText() == "GPIB":
+            try:
+                print("Connecting to instrument")
+                selected_port = self.pyqt5_combobox_com.currentText()
+                print(selected_port)
+                self.generator.connect_instrument_gpib(instrument_id=selected_port)
+                print("Connected to", selected_port)
+            except:
+                print("Error connecting to instrument")
 
     def start_amplitude_ramping(self):
         frequency = self.pyqt5_entry_frequency.text()

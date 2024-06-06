@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>483</width>
-    <height>445</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,12 +61,29 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,2,0,0">
+     <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,0,2,0,0">
       <item>
        <widget class="QLabel" name="label_14">
         <property name="text">
          <string>Function Generator port:</string>
         </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="pyqt5_combobox_com_type">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <item>
+         <property name="text">
+          <string>RS232</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>GPIB</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
